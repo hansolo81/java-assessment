@@ -1,5 +1,7 @@
 # java-assessment
 
+Duration: 2 Hours
+
 Using your knowledge of design patterns and the SOLID principle, improve the implementation of this codebase.
 
 1. Fork this repository
