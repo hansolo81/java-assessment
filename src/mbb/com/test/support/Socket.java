@@ -1,6 +1,5 @@
-package mbb.com.test;
+package mbb.com.test.support;
 
-import mbb.com.test.support.Device;
 import mbb.com.test.support.devices.*;
 
 import java.util.HashMap;
@@ -11,8 +10,7 @@ public class Socket {
     private Map<String, Device> supportedDevices = new HashMap<>();
     private Map<String, Device> pluggedDevices = new HashMap<>();
 
-    public Socket() {
-        registerSupportedDevices();
+    protected Socket() {
     }
 
 
@@ -27,7 +25,7 @@ public class Socket {
         }
     }
 
-    private void registerSupportedDevices() {
+    void registerDefaultSupportedDevices() {
         registerDevice(new SonyPlaystation4());
         registerDevice(new MicrosoftXBoxOne());
         registerDevice(new SonySmartTV());
@@ -107,27 +105,6 @@ public class Socket {
                 System.out.println(device.getName());
             }
         });
-    }
-
-    public static void main(String[] args) {
-        Socket socket = new Socket();
-        socket.plugIn("Sony Playstation 4");
-        socket.plugIn("Microsoft XBox One");
-        socket.plugIn("Sony Smart TV");
-        socket.plugIn("Apple Macbook");
-        socket.plugIn("Samsung Smart TV");
-        socket.plugIn("Samsung Vacuum Cleaner");
-        socket.plugIn("Samsung Laserjet Printer");
-        socket.plugIn("Toshiba Washing Machine");
-        // shows that Toshiba Washing Machine is a Generic Device
-        socket.showPluggedInDevices();
-        System.out.println();
-        // register Toshiba Washing Machine as a supported device
-        socket.registerDevice(new ToshibaWashingMachine());
-        // shows that Toshiba Washing Machine is a Supported Device
-        socket.showPluggedInDevices();
-        //we might be adding new devices in future
-
     }
 
 }
