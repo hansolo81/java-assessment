@@ -21,31 +21,40 @@ public class Socket {
      *
      * @param device
      */
-    public void registerDevice(Device device) {
-        addDevice(device);
+    public synchronized void registerDevice(Device device) {
+        if (!isSupportedDevice(device.getName())) {
+            supportedDevices.put(device.getName(), device);
+        }
     }
 
     private void registerSupportedDevices() {
-        addDevice(new SonyPlaystation4());
-        addDevice(new MicrosoftXBoxOne());
-        addDevice(new SonySmartTV());
-        addDevice(new AppleMacbook());
-        addDevice(new SamsungSmartTV());
-        addDevice(new SamsungVacuumCleaner());
-        addDevice(new SamsungLaserjetPrinter());
+        registerDevice(new SonyPlaystation4());
+        registerDevice(new MicrosoftXBoxOne());
+        registerDevice(new SonySmartTV());
+        registerDevice(new AppleMacbook());
+        registerDevice(new SamsungSmartTV());
+        registerDevice(new SamsungVacuumCleaner());
+        registerDevice(new SamsungLaserjetPrinter());
     }
 
-    private void addDevice(Device device) {
-        supportedDevices.put(device.getName(), device);
-        System.out.println("");
-    }
 
+    /**
+     * Checks device is in supported devices by socket
+     *
+     * @param device
+     * @return
+     */
     private boolean isSupportedDevice(String device) {
         return supportedDevices.containsKey(device);
     }
 
+    /**
+     * Plugs in new device with name
+     *
+     * @param deviceName
+     */
     public void plugIn(String deviceName) {
-        Device device = getDevice(deviceName);
+        Device device = getSupportedDevice(deviceName);
         if (isSupportedDevice(deviceName)) {
             System.out.println("You have plugged in a(an) " + device.getName());
         } else {
@@ -56,18 +65,48 @@ public class Socket {
         }
     }
 
-    private void addPluggedInDevices(Device device) {
-        pluggedDevices.put(device.getName(), device);
+    /**
+     * Registers new device to plugged-in devices
+     *
+     * @param device
+     */
+    private synchronized void addPluggedInDevices(Device device) {
+        if (!pluggedDevices.containsKey(device.getName())) {
+            pluggedDevices.put(device.getName(), device);
+        } else {
+            Device pluggedDevice = pluggedDevices.get(device.getName());
+            // replace plugged device with non generic ones
+            if (pluggedDevice instanceof GenericElectricalDevice && !(device instanceof GenericElectricalDevice)) {
+                pluggedDevices.put(device.getName(), device);
+            }
+        }
+
+
     }
 
-    private Device getDevice(String deviceName) {
+    /**
+     * Gets supported device, if does not support then return new {@link GenericElectricalDevice}
+     *
+     * @param deviceName
+     * @return
+     */
+    private Device getSupportedDevice(String deviceName) {
         Device device = supportedDevices.get(deviceName);
-        return device!=null ? device : new GenericElectricalDevice(deviceName);
+        return device != null ? device : new GenericElectricalDevice(deviceName);
     }
 
 
+    /**
+     * Prints all plugged-in devices
+     */
     public void showPluggedInDevices() {
-        pluggedDevices.forEach((name, device) -> System.out.println(device));
+        pluggedDevices.forEach((name, device) -> {
+            if (!isSupportedDevice(device.getName())){
+                System.out.println("Generic Device: " + device.getName());
+            }else {
+                System.out.println(device.getName());
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -80,10 +119,15 @@ public class Socket {
         socket.plugIn("Samsung Vacuum Cleaner");
         socket.plugIn("Samsung Laserjet Printer");
         socket.plugIn("Toshiba Washing Machine");
+        // shows that Toshiba Washing Machine is a Generic Device
+        socket.showPluggedInDevices();
+        System.out.println();
+        // register Toshiba Washing Machine as a supported device
         socket.registerDevice(new ToshibaWashingMachine());
-        socket.plugIn("Toshiba Washing Machine");
+        // shows that Toshiba Washing Machine is a Supported Device
         socket.showPluggedInDevices();
         //we might be adding new devices in future
+
     }
 
 }

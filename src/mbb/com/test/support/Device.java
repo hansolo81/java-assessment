@@ -8,4 +8,7 @@ public interface Device {
 
     String getName();
 
+    default boolean isGeneric() {
+        return false;
+    }
 }
