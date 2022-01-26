@@ -37,17 +37,17 @@ class Socket implements Plugin  // parent class
 	
 	public void plugIn(String device) // method to find the value 
 	{	
-	    boolean isJavaFun = false;
+	    boolean isFound = false;
 		for (var tdevice : Listofdevice)
         {
             if (tdevice.Name.equals(device))
             {
                  printout(tdevice.Value);
-                 isJavaFun = true;
+                 isFound = true;
             }
         }
         
-        if(!isJavaFun)
+        if(!isFound)
         {
              printout("You have plugged in a Generic Electrical Device");
         }
