@@ -1,0 +1,4 @@
+class DeviceFactory{
+  private DeviceFactory()
+    
+}
