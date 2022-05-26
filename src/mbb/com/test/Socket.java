@@ -1,11 +1,13 @@
 package mbb.com.test;
 
 public class Socket {
-
-	public Socket() {
+	private List<Device> pligIns = new ArrayList<Device>();
+	
+	public Socket() {	
 	}
 	
-	public void plugIn(String device) {		
+	public void plugIn(Device device) {
+		System.out.println("You have plugged in a "+device.getName())
 		if (device.equals("Sony Playstation 4")) {
 			System.out.println("You have plugged in a Sony Playstation 4");
 		} 
