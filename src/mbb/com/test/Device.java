@@ -1,4 +1,6 @@
-class abstract Device
+package mbb.com.domain;
+
+pubic class abstract Device
 {
   private String name;
   public Device(String name){
@@ -6,5 +8,7 @@ class abstract Device
   }
   public String getName(){
     return name;
+  }
+  abstrcat public doDeviceFunction(){
   }   
 }
