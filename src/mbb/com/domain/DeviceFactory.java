@@ -1,6 +1,7 @@
 package mbb.com.domain;
 
 //singleton
+//factory 
 public class DeviceFactory{
   private DeviceFactory(){}
   private DeviceFactory instanse;
