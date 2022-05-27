@@ -16,7 +16,7 @@ public class DeviceFactory{
     Device device = new Device(deviceType){
       //override
       public void doDeviceFunction(){
-        System.out.println("This is immitattion of unique "+this.deviceType+"'s functionality")
+        System.out.println("This is immitattion of unique "+this.name+"'s functionality")
       }
     }
     return device;
