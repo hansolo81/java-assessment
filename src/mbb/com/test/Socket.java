@@ -1,39 +1,25 @@
 package mbb.com.test;
 
+import mbb.com.domain.*;
+
 public class Socket {
-
-	public Socket() {
+	private List<Device> pligIns = new ArrayList<Device>();
+	
+	public Socket() {	
 	}
 	
-	public void plugIn(String device) {		
-		if (device.equals("Sony Playstation 4")) {
-			System.out.println("You have plugged in a Sony Playstation 4");
-		} 
-		else if (device.equals("Microsoft XBox One")) {
-			System.out.println("You have plugged in a Microsoft XBox One");
+	public void plugIn(String deviceType) {
+		try{
+			Device device = DeviceFactory.getInstance().createDevice(deviceType)
+			plugIns.append(device);
+			System.out.println("You have plugged in a "+device.getName());			
 		}
-		else if (device.equals("Sony Smart TV")) {
-			System.out.println("You have plugged in a Sony Smart TV");
+		catch(Exception e)
+		{
+			System.out.println("plugin "+deviceType+" failed: "+e.getMessage());			
 		}
-		else if (device.equals("Apple Macbook")) {
-			System.out.println("You have plugged in an Apple Macbook");
-		}
-		else if (device.equals("Samsung Smart TV")) {
-			System.out.println("You have plugged in a Samsung Smart TV");
-		}
-		else if (device.equals("Samsung Vacuum Cleaner")) {
-			System.out.println("You have plugged in a Samsung Vacuum Cleaner");
-		}
-		else if (device.equals("Samsung Smart TV")) {
-			System.out.println("You have plugged in a Samsung Laserjet Printer");
-		} else {
-			System.out.println("You have plugged in a Generic Electrical Device");
-		}
-
 	}
 	
-	
-
 	public static void main(String[] args) {
 		Socket socket = new Socket();
 		socket.plugIn("Sony Playstation 4");
