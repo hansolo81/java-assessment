@@ -8,9 +8,16 @@ public class Socket {
 	public Socket() {	
 	}
 	
-	public void plugIn(Device device) {
-		plugIns.append(device);
-		System.out.println("You have plugged in a "+device.getName());
+	public void plugIn(String deviceType) {
+		try{
+			Device device = DeviceFactory.getInstance().createDevice(deviceType)
+			plugIns.append(device);
+			System.out.println("You have plugged in a "+device.getName());			
+		}
+		catch(Exception e)
+		{
+			System.out.println("plugin "+deviceType+" failed: "+e.getMessage());			
+		}
 	}
 	
 	public static void main(String[] args) {
