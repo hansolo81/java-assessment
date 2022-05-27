@@ -1,5 +1,7 @@
 package mbb.com.test;
 
+import mbb.com.domain.*;
+
 public class Socket {
 	private List<Device> pligIns = new ArrayList<Device>();
 	
@@ -7,12 +9,10 @@ public class Socket {
 	}
 	
 	public void plugIn(Device device) {
-		System.out.println("You have plugged in a "+device.getName());
 		plugIns.append(device);
+		System.out.println("You have plugged in a "+device.getName());
 	}
 	
-	
-
 	public static void main(String[] args) {
 		Socket socket = new Socket();
 		socket.plugIn("Sony Playstation 4");
