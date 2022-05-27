@@ -11,7 +11,7 @@ public class DeviceFactory{
       return instanse;
     }
   };
-  public Device getDevice(String deviceType){
+  public Device createDevice(String deviceType){
     //simplification here to reduce code amount
     Device device = new Device(deviceType){
       //override
