@@ -13,6 +13,7 @@ public class DeviceFactory{
   public Device getDevice(String deviceType){
     //simplification here to reduce code amount
     Device device = new Device(deviceType){
+      //override
       public void doDeviceFunction(){
         System.out.println("This is immitattion of unique "+this.deviceType+"'s functionality")
       }
