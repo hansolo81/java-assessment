@@ -1,4 +1,0 @@
-class DeviceFactory{
-  private DeviceFactory()
-    
-}
