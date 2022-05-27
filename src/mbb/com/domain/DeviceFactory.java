@@ -1,5 +1,6 @@
 package mbb.com.domain;
 
+//singleton
 public class DeviceFactory{
   private DeviceFactory(){}
   private DeviceFactory instanse;
@@ -10,6 +11,7 @@ public class DeviceFactory{
     }
   };
   public Device getDevice(String deviceType){
+    //simplification here to reduce code amount
     return device;
   }
     
